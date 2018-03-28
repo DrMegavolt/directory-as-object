@@ -1,0 +1,32 @@
+{
+  "name": "directory-to-object",
+  "version": "1.0.0",
+  "description": "Serialize\\Deserialize directory with files as JS object",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DrMegavolt/directory-to-object.git"
+  },
+  "keywords": [
+    "serialize",
+    "directory",
+    "files"
+  ],
+  "devDependencies": {
+    "eslint": "^4.15.0",
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "3.0.1"
+  },
+  "author": "Serhii Kuts",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DrMegavolt/directory-to-object/issues"
+  },
+  "homepage": "https://github.com/DrMegavolt/directory-to-object#readme"
+}
