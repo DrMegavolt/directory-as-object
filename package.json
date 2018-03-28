@@ -1,5 +1,5 @@
 {
-  "name": "directory-to-object",
+  "name": "directory-as-object",
   "version": "1.0.0",
   "description": "Serialize\\Deserialize directory with files as JS object",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DrMegavolt/directory-to-object.git"
+    "url": "git+https://github.com/DrMegavolt/directory-as-object.git"
   },
   "keywords": [
     "serialize",
@@ -28,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/DrMegavolt/directory-to-object/issues"
   },
-  "homepage": "https://github.com/DrMegavolt/directory-to-object#readme"
+  "homepage": "https://github.com/DrMegavolt/directory-to-object#readme",
+  "dependencies": {
+    "util.promisify": "^1.0.0"
+  }
 }
