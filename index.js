@@ -6,6 +6,7 @@ const rmFile = promisify(fs.unlink)
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
 const fileStat = promisify(fs.lstat)
+const rimraf = promisify(require('rimraf'))
 const path = require('path')
 class DirectoryAsObject {
   constructor ({rootPath, ignorePatterns = []}) {
@@ -24,16 +25,35 @@ class DirectoryAsObject {
       })
       .then(readFileOps => { return Promise.all(readFileOps) })
       .then(fileInfos => {
-        console.log('FFF', fileInfos)
-
         return fileInfos.reduce((result, curr) => {
           result[curr.filename] = curr.content
           return result
         }, {})
       })
   }
-  deserialize (data) {
+  deserialize (files) {
+    console.log('AA', files)
 
+    const promises = Object.keys(files).map(filename => {
+      const filePath = path.join(this.rootPath, filename)
+      if (files[filename] === null) { // if key is present but null do delete the file or folder
+        return fileStat(filePath)
+          .then(stat => {
+            if (stat.isFile()) {
+              return rmFile(filePath)
+            } else {
+              return rimraf(filePath)
+            }
+          })
+      }
+      if (typeof files[filename] === 'string') {
+        return writeFile(filePath, files[filename])
+      } else { // this is directory representation
+        let recursiveDirAsObject = new DirectoryAsObject({rootPath: filePath})
+        return recursiveDirAsObject.deserialize(files[filename])
+      }
+    })
+    return Promise.all(promises)
   }
   readFileOrFolder (filename) {
     let p = path.join(this.rootPath, filename)
