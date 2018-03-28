@@ -32,8 +32,6 @@ class DirectoryAsObject {
       })
   }
   deserialize (files) {
-    console.log('AA', files)
-
     const promises = Object.keys(files).map(filename => {
       const filePath = path.join(this.rootPath, filename)
       if (files[filename] === null) { // if key is present but null do delete the file or folder
