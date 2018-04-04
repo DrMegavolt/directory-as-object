@@ -6,12 +6,17 @@ const rmFile = promisify(fs.unlink)
 const readdir = promisify(fs.readdir)
 const readFile = promisify(fs.readFile)
 const fileStat = promisify(fs.lstat)
+
 const rimraf = promisify(require('rimraf'))
 const path = require('path')
 class DirectoryAsObject {
   constructor ({rootPath, ignorePatterns = []}) {
     this.rootPath = rootPath
     this.ignorePatterns = ignorePatterns
+    
+    if(!fs.existsSync(rootPath)){
+      fs.mkdirSync(rootPath)
+    }
   }
   serialize () {
     return readdir(this.rootPath)

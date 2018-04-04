@@ -1,6 +1,6 @@
 {
   "name": "directory-as-object",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Serialize\\Deserialize directory with files as JS object",
   "main": "index.js",
   "scripts": {
