@@ -13,12 +13,11 @@ class DirectoryAsObject {
   constructor ({rootPath, ignorePatterns = []}) {
     this.rootPath = rootPath
     this.ignorePatterns = ignorePatterns
-    
-    if(!fs.existsSync(rootPath)){
-      fs.mkdirSync(rootPath)
-    }
   }
   serialize () {
+    if (!fs.existsSync(this.rootPath)) {
+      return {}
+    }
     return readdir(this.rootPath)
       .then(filenames => {
         // Ignore files/sub dirs matching regex patterns
@@ -37,6 +36,9 @@ class DirectoryAsObject {
       })
   }
   deserialize (files) {
+    if (!fs.existsSync(this.rootPath)) {
+      fs.mkdirSync(this.rootPath)
+    }
     const promises = Object.keys(files).map(filename => {
       const filePath = path.join(this.rootPath, filename)
       if (files[filename] === null) { // if key is present but null do delete the file or folder
